@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        ul { list-style-type: none; margin-left: 1em; }
+        li::before { content: "📁 "; }
+        li.file::before { content: "📄 "; }
+    </style>
+</head>
+<body>
+    <h1>ダウンロードされたファイル</h1>
+    <h2>{{ files|length }}個のファイルがダウンロードされました</h2>
+    <div>
+    {% macro render_node(node) %}
+        {% if node %}
+            <ul>
+                {% for key, value in node.items() %}
+                {% if value %}
+                    <li>{{ key }}{{ render_node(value) }}</li>
+                {% else %}
+                    <li class="file">{{ key }}</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endmacro %}
+    {{ render_node(tree) }}
+  </div>
+</body>
+</html>

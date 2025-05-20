@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>edit_tracing</title>
+</head>
+<body>
+    <h1>情報を入力してください</h1>
+    <form method="POST" action="{{ url_for('add_tracing') }}">
+        <label for="name">名前:</label>
+        <input type="text" id="name" name="name" value="{{ data['name'] }}" required><br><br>
+
+        <label for="url">URL:</label>
+        <input type="url" id="url" name="url" value="{{ data['url'] }}" required><br><br>
+
+        <label for="to_folder">保存するフォルダ:</label>
+        <input type="to_folder" id="to_folder" name="to_folder" value="{{ data['to_folder'] }}" required><br><br>
+
+        <input type="submit" value="登録">
+    </form>
+</body>
+</html>

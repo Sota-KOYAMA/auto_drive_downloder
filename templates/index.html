@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>auto-drive-downloader</title>
+</head>
+<body>
+    <h2>追跡中のドライブフォルダ</h2>
+    <form action="{{ url_for('all_update') }}" method="post"><button type="submit" name="all_update">すべて更新</button></form>
+    <form action="{{ url_for('edit_tracing') }}" method="get"><button type="submit" name="edit_tracing">新規登録</button></form>
+    <ul>
+        {% for k, d in data.items() %}
+        <li>
+            <h4>name: {{ d["name"] }}</h4>
+            <p>追跡中のフォルダ：<a href="{{ d['url'] }}">Driveリンクを開く</a></p>
+            <p>保存するフォルダ：{{ d["to_folder"] }}</p>
+            <form action="{{ url_for('update') }}" method="post"><button type="submit" name="update" value="{{ k }}">更新</button></form>
+            <form action="{{ url_for('edit_tracing') }}" method="post"><button type="submit" name="edit_tracing" value="{{ k }}">編集</button></form>
+            <form action="{{ url_for('delete_tracing') }}" method="post"><button type="submit" name="delete" value="{{ k }}">消去</button></form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
